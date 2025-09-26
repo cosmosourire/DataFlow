@@ -7,4 +7,4 @@ kubectl create namespace kafka
 kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
 
 # install kafka
-kubectl apply -f kraft-single.yml -n kafka
+kubectl apply -f single-kraft.yml -n kafka
