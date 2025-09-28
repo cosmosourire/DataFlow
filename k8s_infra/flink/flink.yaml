@@ -1,0 +1,35 @@
+global:
+  defaultStorageClass: standard
+jobmanager:
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+  service:
+    type: NodePort
+    ports:
+      http: 8081
+    nodePorts:
+      http: 30081 
+  extraVolumeMounts:
+    - name: flink-shared
+      mountPath: /data/flink
+  extraVolumes:
+    - name: flink-shared
+      persistentVolumeClaim:
+        claimName: flink-shared-rwx
+
+taskmanager:
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 1
+      memory: 2Gi
+  extraVolumeMounts:
+    - name: flink-shared
+      mountPath: /data/flink
+  extraVolumes:
+    - name: flink-shared
+      persistentVolumeClaim:
+        claimName: flink-shared-rwx
